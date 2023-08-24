@@ -1,6 +1,6 @@
 # OpenAi PHP Client
 
-[![CI status](https://github.com/thojou/openai-php-client/workflows/CI/badge.svg)](https://github.com/thojou/openai-php-client/actions)
+[![CI](https://github.com/thojou/openai-php-client/actions/workflows/ci.yml/badge.svg)](https://github.com/thojou/openai-php-client/actions/workflows/ci.yml)
 
 The **OpenAi PHP Client** is a user-friendly PHP library designed to facilitate interactions with the OpenAI Rest API.
 

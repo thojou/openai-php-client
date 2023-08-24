@@ -72,6 +72,7 @@ class RequestHandlerTest extends TestCase
             429 => [429, RateLimitException::class, '{"error": {"message": "Rate limit exceeded"}}'],
             503 => [503, ServiceUnavailableException::class, '{"error": {"message": "Service unavailable"}}'],
             500 => [500, APIException::class, '{"error": {"message": "API error"}}'],
+            501 => [501, APIException::class, ''],
         ];
     }
 
