@@ -28,7 +28,5 @@
         "psr-4": {
             "Thojou\\OpenAi\\Tests\\": "tests/"
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
