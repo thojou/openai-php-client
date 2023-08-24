@@ -26,9 +26,9 @@ To begin utilizing the capabilities of the **OpenAi PHP Client**, you'll need an
 ```php
 <?php
 
-require_once __DIR__ . '/vendor/autoload.php';
-
 use Thojou\OpenAi\OpenAi;
+
+require_once __DIR__ . '/vendor/autoload.php';
 
 $apiKey = "<YOUR API KEY>";
 
@@ -53,7 +53,7 @@ The **OpenAi PHP Client** is designed to seamlessly align with the request and r
 
 ### OpenAi Class
 
-The `OpenAi` class is a central component of the OpenAI API interaction library. It provides methods for accessing different API endpoints such as Models, Chat, Images, Embeddings, Audio, Files, FineTunes, and Moderations.
+The `OpenAi` class is a central component of the OpenAI API interaction library. It provides methods for accessing different API endpoints such as Models, Chat, Images, Embeddings, Audio, Files, Fine-Tuning, and Moderations.
 
 #### Constructor
 
@@ -138,7 +138,7 @@ Returns an instance of the Files endpoint.
 - Returns:
     - `Files`: An instance of the Files endpoint.
 
-##### `fineTunes()`
+##### `fineTuning()`
 
 ```php
 public function fineTuning(): FineTuning

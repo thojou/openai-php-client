@@ -47,7 +47,9 @@ final class Images extends Endpoint
     public function edit(array $options): array
     {
         return $this->handler->execute(
-            new Request('post', 'images/edits', $options)
+            new Request('post', 'images/edits', $options, [
+                'Content-Type' => 'multipart/form-data'
+            ])
         );
     }
 
@@ -65,7 +67,9 @@ final class Images extends Endpoint
     public function variation(array $options): array
     {
         return $this->handler->execute(
-            new Request('post', 'images/variations', $options)
+            new Request('post', 'images/variations', $options, [
+                'Content-Type' => 'multipart/form-data'
+            ])
         );
     }
 }
