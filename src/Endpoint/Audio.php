@@ -17,7 +17,9 @@ final class Audio extends Endpoint
     public function transcription(array $options = []): array
     {
         return $this->handler->execute(
-            new Request('post', 'audio/transcriptions', $options)
+            new Request('post', 'audio/transcriptions', $options, [
+                'Content-Type' => 'multipart/form-data'
+            ])
         );
     }
 
@@ -31,7 +33,9 @@ final class Audio extends Endpoint
     public function translation(array $options = []): array
     {
         return $this->handler->execute(
-            new Request('post', 'audio/translations', $options)
+            new Request('post', 'audio/translations', $options, [
+                'Content-Type' => 'multipart/form-data'
+            ])
         );
     }
 }

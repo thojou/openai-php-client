@@ -2,6 +2,9 @@
 
 namespace Thojou\OpenAi;
 
+/**
+ * @internal This class is not meant to be used by library users.
+ */
 final class Request implements RequestInterface
 {
     /**

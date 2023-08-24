@@ -40,15 +40,21 @@ class RequestHandler implements RequestHandlerInterface
         $headers = $request->getHeaders();
         $requestMethod = strtoupper($request->getMethod());
 
-        if ($requestMethod === 'POST') {
+        if ($requestMethod === 'POST' && !isset($headers['Content-Type'])) {
             $headers['Content-Type'] = "application/json";
+        }
+
+        $body = $request->getBody();
+
+        if($headers['Content-Type'] === "application/json") {
+            $body = json_encode($body);
         }
 
         try {
             $response = $this->client
                 ->request($requestMethod, $request->getUrl(), [
                     'headers' => $headers,
-                    'body' => $request->getBody() !== null ? json_encode($request->getBody()) : null
+                    'body' => $body
                 ]);
 
             $this->throwIfErrorStatusCode($response);

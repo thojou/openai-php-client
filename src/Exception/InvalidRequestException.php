@@ -5,14 +5,14 @@ namespace Thojou\OpenAi\Exception;
 class InvalidRequestException extends OpenAiException
 {
     /**
-     * @param string                            $param
+     * @param string|null                       $param
      * @param string                            $message
      * @param string                            $httpBody
      * @param int                               $httpStatus
      * @param array<string, array<int, string>> $httpHeaders
      */
     public function __construct(
-        protected readonly string $param,
+        protected readonly ?string $param,
         string $message,
         string $httpBody,
         int $httpStatus,
@@ -21,7 +21,7 @@ class InvalidRequestException extends OpenAiException
         parent::__construct($message, $httpBody, $httpStatus, $httpHeaders);
     }
 
-    public function getParam(): string
+    public function getParam(): ?string
     {
         return $this->param;
     }
