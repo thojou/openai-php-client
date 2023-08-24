@@ -2,14 +2,18 @@
 
 namespace Thojou\OpenAi\Exception;
 
+/**
+ * Represents an exception that is thrown when an invalid request is made (HTTP status codes 400, 404, and 415) in the
+ * OpenAI API.
+ */
 class InvalidRequestException extends OpenAiException
 {
     /**
-     * @param string|null                       $param
-     * @param string                            $message
-     * @param string                            $httpBody
-     * @param int                               $httpStatus
-     * @param array<string, array<int, string>> $httpHeaders
+     * @param string|null                       $param       The name of the invalid parameter (if applicable).
+     * @param string                            $message     A description of the error.
+     * @param string                            $httpBody    The response body from the API.
+     * @param int                               $httpStatus  The HTTP status code of the response.
+     * @param array<string, array<int, string>> $httpHeaders The HTTP headers from the response.
      */
     public function __construct(
         protected readonly ?string $param,
@@ -18,16 +22,21 @@ class InvalidRequestException extends OpenAiException
         int $httpStatus,
         array $httpHeaders = []
     ) {
-        parent::__construct($message, $httpBody, $httpStatus, $httpHeaders);
+        parent::__construct(
+            $message . "\nInvalid parameter: {$this->param}",
+            $httpBody,
+            $httpStatus,
+            $httpHeaders
+        );
     }
 
+    /**
+     * Get the name of the invalid parameter causing the exception.
+     *
+     * @return string|null The name of the invalid parameter, or null if not applicable.
+     */
     public function getParam(): ?string
     {
         return $this->param;
-    }
-
-    public function __toString(): string
-    {
-        return parent::__toString() . "Invalid parameter: {$this->param}\n";
     }
 }

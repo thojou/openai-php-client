@@ -9,6 +9,7 @@ use Thojou\OpenAi\Endpoint\Embeddings;
 use Thojou\OpenAi\Endpoint\Endpoint;
 use Thojou\OpenAi\Endpoint\Files;
 use Thojou\OpenAi\Endpoint\FineTunes;
+use Thojou\OpenAi\Endpoint\FineTuning;
 use Thojou\OpenAi\Endpoint\Images;
 use Thojou\OpenAi\Endpoint\Models;
 use Thojou\OpenAi\Endpoint\Moderations;
@@ -42,7 +43,7 @@ class OpenAiTest extends TestCase
             Chat::class => [Chat::class, 'chat'],
             Embeddings::class => [Embeddings::class, 'embeddings'],
             Files::class => [Files::class, 'files'],
-            FineTunes::class => [FineTunes::class, 'fineTunes'],
+            FineTuning::class => [FineTuning::class, 'fineTuning'],
             Images::class => [Images::class, 'images'],
             Moderations::class => [Moderations::class, 'moderation'],
             Models::class => [Models::class, 'models'],

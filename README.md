@@ -45,7 +45,7 @@ For more practical examples, please refer to the [examples](./examples) folder.
 
 ## Limitations
 
-Certain endpoints, namely [Edits](https://platform.openai.com/docs/api-reference/edits) and [Completions](https://platform.openai.com/docs/api-reference/completions), are not integrated due to their deprecated status within the OpenAI API.
+Certain endpoints, namely [Edits](https://platform.openai.com/docs/api-reference/edits), [Fine-Tunes](https://platform.openai.com/docs/api-reference/fine-tunes) and [Completions](https://platform.openai.com/docs/api-reference/completions), are not integrated due to their deprecated status within the OpenAI API.
 
 ## Documentation
 
@@ -141,13 +141,13 @@ Returns an instance of the Files endpoint.
 ##### `fineTunes()`
 
 ```php
-public function fineTunes(): FineTunes
+public function fineTuning(): FineTuning
 ```
 
-Returns an instance of the FineTunes endpoint.
+Returns an instance of the FineTuning endpoint.
 
 - Returns:
-    - `FineTunes`: An instance of the FineTunes endpoint.
+    - `FineTuning`: An instance of the FineTuning endpoint.
 
 ##### `moderation()`
 

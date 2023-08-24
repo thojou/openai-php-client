@@ -9,6 +9,7 @@ use Thojou\OpenAi\Endpoint\Chat;
 use Thojou\OpenAi\Endpoint\Embeddings;
 use Thojou\OpenAi\Endpoint\Files;
 use Thojou\OpenAi\Endpoint\FineTunes;
+use Thojou\OpenAi\Endpoint\FineTuning;
 use Thojou\OpenAi\Endpoint\Images;
 use Thojou\OpenAi\Endpoint\Models;
 use Thojou\OpenAi\Endpoint\Moderations;
@@ -93,17 +94,15 @@ class EndpointTest extends TestCase
     public static function provideEndpointDataWithoutBody(): array
     {
         return [
-            'files list' => [Files::class, 'list', 'files', 'get'],
-            'files delete' => [Files::class, 'delete', 'files', 'delete'],
-            'files retrieve' => [Files::class, 'retrieve', 'files/%s', 'get', [1]],
-            'files content' => [Files::class, 'content', 'files/%s/content', 'get', [1]],
-            'fine tunes list' => [FineTunes::class, 'list', 'fine-tunes', 'get'],
-            'fine tunes retrieve' => [FineTunes::class, 'retrieve', 'fine-tunes/%s', 'get', [1]],
-            'fine tunes events' => [FineTunes::class, 'events', 'fine-tunes/%s/events', 'get', [1]],
-            'fine tunes cancel' => [FineTunes::class, 'cancel', 'fine-tunes/%s/cancel', 'post', [1]],
-            'fine tunes delete' => [FineTunes::class, 'delete', "models/%s", 'delete', [1]],
-            'model list' => [Models::class, 'list', 'models', 'get'],
-            'model retrieve' => [Models::class, 'retrieve', 'models/%s', 'get', [1]],
+            'files list' => [Files::class, 'list', 'files', 'GET'],
+            'files delete' => [Files::class, 'delete', 'files', 'DELETE'],
+            'files retrieve' => [Files::class, 'retrieve', 'files/%s', 'GET', [1]],
+            'files content' => [Files::class, 'content', 'files/%s/content', 'GET', [1]],
+            'fine tuning retrieve' => [FineTuning::class, 'retrieve', 'fine_tuning/jobs/%s', 'GET', [1]],
+            'fine tuning events' => [FineTuning::class, 'events', 'fine_tuning/jobs/%s/events', 'GET', [1]],
+            'fine tuning cancel' => [FineTuning::class, 'cancel', 'fine_tuning/jobs/%s/cancel', 'POST', [1]],
+            'model list' => [Models::class, 'list', 'models', 'GET'],
+            'model retrieve' => [Models::class, 'retrieve', 'models/%s', 'GET', [1]],
         ];
     }
 
@@ -113,16 +112,16 @@ class EndpointTest extends TestCase
     public static function provideEndpointDataWithBody(): array
     {
         return [
-            'audio transcription' => [Audio::class, 'transcription', 'audio/transcriptions', 'post'],
-            'audio translation' => [Audio::class, 'translation', 'audio/translations', 'post'],
-            'chat completion' => [Chat::class, 'completion', 'chat/completions', 'post'],
-            'embedding' => [Embeddings::class, 'embedding', 'embeddings', 'post'],
-            'files upload' => [Files::class, 'upload', 'files', 'post'],
-            'fine tunes create' => [FineTunes::class, 'create', 'fine-tunes', 'post'],
-            'image generation' => [Images::class, 'generation', 'images/generations', 'post'],
-            'image edit' => [Images::class, 'edit', 'images/edits', 'post'],
-            'image variation' => [Images::class, 'variation', 'images/variations', 'post'],
-            'moderations retrieve' => [Moderations::class, 'moderation', 'moderations', 'post'],
+            'audio transcription' => [Audio::class, 'transcription', 'audio/transcriptions', 'POST'],
+            'audio translation' => [Audio::class, 'translation', 'audio/translations', 'POST'],
+            'chat completion' => [Chat::class, 'completion', 'chat/completions', 'POST'],
+            'embedding' => [Embeddings::class, 'embedding', 'embeddings', 'POST'],
+            'files upload' => [Files::class, 'upload', 'files', 'POST'],
+            'fine tuning create' => [FineTuning::class, 'create', 'fine_tuning/jobs', 'POST'],
+            'image generation' => [Images::class, 'generation', 'images/generations', 'POST'],
+            'image edit' => [Images::class, 'edit', 'images/edits', 'POST'],
+            'image variation' => [Images::class, 'variation', 'images/variations', 'POST'],
+            'moderations retrieve' => [Moderations::class, 'moderation', 'moderations', 'POST'],
         ];
     }
 

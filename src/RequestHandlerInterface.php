@@ -10,12 +10,17 @@ use Thojou\OpenAi\Exception\RateLimitException;
 use Thojou\OpenAi\Exception\ServiceUnavailableException;
 use Thojou\OpenAi\Exception\TryAgainException;
 
+/**
+ * This interface defines the methods that a request handler must implement.
+ */
 interface RequestHandlerInterface
 {
     /**
-     * @param Request $request
+     * Execute an HTTP request and handle possible exceptions.
      *
-     * @return array<string, mixed>
+     * @param RequestInterface $request The HTTP request to execute.
+     *
+     * @return array<string, mixed> The response data from the API.
      * @throws APIException
      * @throws AuthenticationException
      * @throws InvalidRequestException

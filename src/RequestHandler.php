@@ -16,6 +16,11 @@ use Thojou\OpenAi\Exception\RateLimitException;
 use Thojou\OpenAi\Exception\ServiceUnavailableException;
 use Thojou\OpenAi\Exception\TryAgainException;
 
+/**
+ * This class is responsible for executing HTTP requests and handling possible exceptions.
+ *
+ * @internal This class is not meant to be used or overwritten outside the library
+ */
 class RequestHandler implements RequestHandlerInterface
 {
     public function __construct(
@@ -24,9 +29,11 @@ class RequestHandler implements RequestHandlerInterface
     }
 
     /**
-     * @param RequestInterface $request
+     * Execute an HTTP request and handle possible exceptions.
      *
-     * @return array<string, mixed>
+     * @param RequestInterface $request The HTTP request to execute.
+     *
+     * @return array<string, mixed> The response data from the API.
      * @throws APIException
      * @throws AuthenticationException
      * @throws InvalidRequestException
@@ -37,6 +44,7 @@ class RequestHandler implements RequestHandlerInterface
      */
     public function execute(RequestInterface $request): array
     {
+        // Prepare headers and request body
         $headers = $request->getHeaders();
         $requestMethod = strtoupper($request->getMethod());
 
@@ -46,16 +54,15 @@ class RequestHandler implements RequestHandlerInterface
 
         $body = $request->getBody();
 
-        if($headers['Content-Type'] === "application/json") {
+        if ($headers['Content-Type'] === "application/json") {
             $body = json_encode($body);
         }
 
         try {
-            $response = $this->client
-                ->request($requestMethod, $request->getUrl(), [
-                    'headers' => $headers,
-                    'body' => $body
-                ]);
+            $response = $this->client->request($requestMethod, $request->getUrl(), [
+                'headers' => $headers,
+                'body' => $body
+            ]);
 
             $this->throwIfErrorStatusCode($response);
 
@@ -67,13 +74,15 @@ class RequestHandler implements RequestHandlerInterface
             }
 
             return (array)json_decode($responseContent, true);
-        } catch (TransportExceptionInterface|ClientExceptionInterface|ServerExceptionInterface|RedirectionExceptionInterface $e) {
+        } catch (TransportExceptionInterface | ClientExceptionInterface | ServerExceptionInterface | RedirectionExceptionInterface $e) {
             throw new APIException($e->getMessage(), '', $e->getCode());
         }
     }
 
     /**
-     * @param ResponseInterface $response
+     * Check the response for error status codes and throw corresponding exceptions.
+     *
+     * @param ResponseInterface $response The HTTP response to check.
      *
      * @throws APIException
      * @throws AuthenticationException
@@ -94,6 +103,7 @@ class RequestHandler implements RequestHandlerInterface
         if (200 <= $statusCode && $statusCode < 300) {
             return;
         }
+
         $body = $response->getContent(false);
         $headers = $response->getHeaders(false);
 
@@ -117,15 +127,17 @@ class RequestHandler implements RequestHandlerInterface
     }
 
     /**
-     * @param string $body
+     * Extract error data from the response body.
      *
-     * @return array<string, string>
+     * @param string $body The response body.
+     *
+     * @return array<string, string> The extracted error data.
      */
     private function extractErrorData(string $body): array
     {
         $data = (array)json_decode($body, true, 512);
 
-        if(isset($data['error']) && is_array($data['error'])) {
+        if (isset($data['error']) && is_array($data['error'])) {
             return $data['error'];
         }
 

@@ -3,15 +3,19 @@
 namespace Thojou\OpenAi;
 
 /**
+ * Represents an HTTP request to be made by the OpenAI library.
+ *
  * @internal This class is not meant to be used by library users.
  */
 final class Request implements RequestInterface
 {
     /**
-     * @param string                $method
-     * @param string                $url
-     * @param array<string, mixed>  $body
-     * @param array<string, string> $header
+     * Construct an HTTP request.
+     *
+     * @param string                $method The HTTP method of the request (e.g., GET, POST).
+     * @param string                $url The URL to send the request to.
+     * @param array<string, mixed>  $body The request body data (if applicable).
+     * @param array<string, string> $header The request headers.
      */
     public function __construct(
         private readonly string $method,
@@ -22,7 +26,9 @@ final class Request implements RequestInterface
     }
 
     /**
-     * @return array<string, string>
+     * Get the request headers.
+     *
+     * @return array<string, string> An array of request headers.
      */
     public function getHeaders(): array
     {
@@ -30,18 +36,30 @@ final class Request implements RequestInterface
     }
 
     /**
-     * @return array<string, mixed>|null
+     * Get the request body data (if applicable).
+     *
+     * @return array<string, mixed>|null The request body data or null if not applicable.
      */
     public function getBody(): ?array
     {
         return $this->body;
     }
 
+    /**
+     * Get the HTTP method of the request in uppercase (e.g., "GET", "POST").
+     *
+     * @return string The uppercase HTTP method.
+     */
     public function getMethod(): string
     {
-        return strtolower($this->method);
+        return strtoupper($this->method);
     }
 
+    /**
+     * Get the URL to send the request to.
+     *
+     * @return string The URL of the request.
+     */
     public function getUrl(): string
     {
         return $this->url;

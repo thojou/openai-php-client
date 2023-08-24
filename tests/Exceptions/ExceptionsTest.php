@@ -18,18 +18,14 @@ class ExceptionsTest extends TestCase
     {
         $message = 'An error occurred';
         $param = "test";
+        $expectedMessage = InvalidRequestException::class . ": [400]: {$message}\nInvalid parameter: {$param}\n";
         $exception = new InvalidRequestException($param, $message, '', 400);
 
-        $this->assertEquals($message, $exception->getMessage());
+        $this->assertEquals($expectedMessage, $exception->getMessage());
         $this->assertEquals('', $exception->getHttpBody());
         $this->assertEquals(400, $exception->getHttpStatus());
         $this->assertEquals([], $exception->getHttpHeaders());
         $this->assertEquals($param, $exception->getParam());
-
-        $this->assertSame(
-            InvalidRequestException::class . ": [400]: {$message}\nInvalid parameter: {$param}\n",
-            (string)$exception
-        );
     }
 
     /**
@@ -42,15 +38,15 @@ class ExceptionsTest extends TestCase
      */
     public function testOtherException(int $statusCode, string $exceptionClass): void
     {
+
         $message = 'An error occurred';
+        $expectedMessage = $exceptionClass . ": [{$statusCode}]: {$message}\n";
         $exception = new $exceptionClass($message, '', $statusCode);
 
-        $this->assertEquals($message, $exception->getMessage());
+        $this->assertEquals($expectedMessage, $exception->getMessage());
         $this->assertEquals('', $exception->getHttpBody());
         $this->assertEquals($statusCode, $exception->getHttpStatus());
         $this->assertEquals([], $exception->getHttpHeaders());
-
-        $this->assertSame($exceptionClass . ": [{$statusCode}]: {$message}\n", (string)$exception);
     }
 
     /**

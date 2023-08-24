@@ -2,19 +2,36 @@
 
 namespace Thojou\OpenAi;
 
+/**
+ * Represents an HTTP request interface to be used by the OpenAI library.
+ */
 interface RequestInterface
 {
     /**
-     * @return array<string, string>
+     * Get the headers for the HTTP request.
+     *
+     * @return array<string, string> An associative array of request headers.
      */
     public function getHeaders(): array;
 
     /**
-     * @return array<string, mixed>|null
+     * Get the body data for the HTTP request (if applicable).
+     *
+     * @return array<string, mixed>|null The body data or null if not applicable.
      */
     public function getBody(): ?array;
 
+    /**
+     * Get the HTTP method for the request (e.g., GET, POST, etc.).
+     *
+     * @return string The uppercase HTTP method.
+     */
     public function getMethod(): string;
 
+    /**
+     * Get the URL for the request.
+     *
+     * @return string The URL of the request.
+     */
     public function getUrl(): string;
 }

@@ -4,13 +4,16 @@ namespace Thojou\OpenAi\Exception;
 
 use Exception;
 
+/**
+ * An abstract base exception class for handling exceptions related to the OpenAI API.
+ */
 abstract class OpenAiException extends Exception
 {
     /**
-     * @param string                            $message
-     * @param string                            $httpBody
-     * @param int                               $httpStatus
-     * @param array<string, array<int, string>> $httpHeaders
+     * @param string                            $message     A description of the error.
+     * @param string                            $httpBody    The response body from the API.
+     * @param int                               $httpStatus  The HTTP status code of the response.
+     * @param array<string, array<int, string>> $httpHeaders The HTTP headers from the response.
      */
     public function __construct(
         string $message,
@@ -18,11 +21,16 @@ abstract class OpenAiException extends Exception
         protected readonly int $httpStatus,
         protected readonly array $httpHeaders = []
     ) {
-        parent::__construct($message, $httpStatus);
+        parent::__construct(
+            static::class . ": [{$this->httpStatus}]: {$message}\n",
+            $httpStatus
+        );
     }
 
     /**
-     * @return string
+     * Get the response body from the API causing the exception.
+     *
+     * @return string The response body.
      */
     public function getHttpBody(): string
     {
@@ -30,7 +38,9 @@ abstract class OpenAiException extends Exception
     }
 
     /**
-     * @return int
+     * Get the HTTP status code of the response causing the exception.
+     *
+     * @return int The HTTP status code.
      */
     public function getHttpStatus(): int
     {
@@ -38,15 +48,12 @@ abstract class OpenAiException extends Exception
     }
 
     /**
-     * @return array<string, array<int, string>>
+     * Get the HTTP headers from the response causing the exception.
+     *
+     * @return array<string, array<int, string>> The HTTP headers.
      */
     public function getHttpHeaders(): array
     {
         return $this->httpHeaders;
-    }
-
-    public function __toString(): string
-    {
-        return static::class . ": [{$this->httpStatus}]: {$this->message}\n";
     }
 }

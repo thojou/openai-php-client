@@ -5,16 +5,27 @@ namespace Thojou\OpenAi\Endpoint;
 use Thojou\OpenAi\Exception\OpenAiException;
 use Thojou\OpenAi\Request;
 
+/**
+ * Represents the Audio endpoint for interacting with audio-related operations in the OpenAI API.
+ *
+ * @link     https://platform.openai.com/docs/api-reference/audio
+ *
+ * @internal This class is not meant to be used by library users.
+ */
 final class Audio extends Endpoint
 {
     /**
-     * @param array<string, mixed> $options
+     * Transcribes audio into the input language.
      *
-     * @return array<string, mixed>
+     * @param array<string, mixed> $options Options for configuring the transcription.
      *
-     * @throws OpenAiException
+     * @return array<string, mixed> An array containing the translated text.
+     *
+     * @throws OpenAiException If there's an issue with the API request or response.
+     *
+     * @link https://platform.openai.com/docs/api-reference/audio/createTranscription
      */
-    public function transcription(array $options = []): array
+    public function transcription(array $options): array
     {
         return $this->handler->execute(
             new Request('post', 'audio/transcriptions', $options, [
@@ -24,13 +35,17 @@ final class Audio extends Endpoint
     }
 
     /**
-     * @param array<string, mixed> $options
+     * Translates audio into English.
      *
-     * @return array<string, mixed>
+     * @param array<string, mixed> $options Options for configuring the translation.
      *
-     * @throws OpenAiException
+     * @return array<string, mixed> An array containing the translated text.
+     *
+     * @throws OpenAiException If there's an issue with the API request or response.
+     *
+     * @link https://platform.openai.com/docs/api-reference/audio/createTranslation
      */
-    public function translation(array $options = []): array
+    public function translation(array $options): array
     {
         return $this->handler->execute(
             new Request('post', 'audio/translations', $options, [
