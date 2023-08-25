@@ -54,7 +54,7 @@ class RequestHandler implements RequestHandlerInterface
 
         $body = $request->getBody();
 
-        if ($headers['Content-Type'] === "application/json") {
+        if ($body && $headers['Content-Type'] === "application/json") {
             $body = json_encode($body);
         }
 

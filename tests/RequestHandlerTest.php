@@ -92,9 +92,11 @@ class RequestHandlerTest extends TestCase
     }
 
     /**
-     * @param string                $content
-     * @param array<string, string> $headers
-     * @param array<string, string> $expected
+     * @param mixed                             $body
+     * @param array<string, string>             $requestHeaders
+     * @param string                            $content
+     * @param array<string, array<int, string>> $headers
+     * @param array<string, string>             $expected
      *
      * @return void
      * @throws APIException
@@ -105,14 +107,20 @@ class RequestHandlerTest extends TestCase
      * @throws RateLimitException
      * @throws ServiceUnavailableException
      * @throws TryAgainException
-     *
      * @dataProvider provideValidRequestData
      */
-    public function testWithPlainResponse(string $content, array $headers, array $expected): void
-    {
+    public function testValidRequests(
+        mixed $body,
+        array $requestHeaders,
+        ?string $content,
+        array $headers,
+        array $expected
+    ): void {
         $request = $this->createMock(RequestInterface::class);
         $request->method('getMethod')->willReturn('get');
         $request->method('getUrl')->willReturn('endpoint');
+        $request->method('getBody')->willReturn($body);
+        $request->method('getHeaders')->willReturn($requestHeaders);
 
         $response = $this->createMock(ResponseInterface::class);
         $response->method('getStatusCode')->willReturn(200);
@@ -134,8 +142,10 @@ class RequestHandlerTest extends TestCase
     public static function provideValidRequestData(): array
     {
         return [
-            'plain text' => ['plain response', ['Content-Type' => ['text/plain']], ['result' => 'plain response']],
-            'json response' => ['{"text": "success"}', [], ['text' => 'success']],
+            'json_request_plain_response' => [["test" => "value"], ['Content-Type' => 'application/json'], 'plain response', ['Content-Type' => ['text/plain']], ['result' => 'plain response']],
+            'json_request_json_response' => [["test" => "value"], ['Content-Type' => 'application/json'], '{"text": "success"}', [], ['text' => 'success']],
+            'empty_request_json_response' => [null, [], '{"text": "success"}', [], ['text' => 'success']],
+            'empty_request_empty_response' => [null, [], '', [], []],
         ];
     }
 }
