@@ -18,8 +18,5 @@ $result = $openAi->embeddings()->embedding([
     'input' => $inputs
 ]);
 
-foreach($result['data'] as $key => $data) {
-    echo "Input: {$inputs[$key]}\n";
-    echo "Embedding: " . join(', ', array_slice($data['embedding'], 0, 10)) . "...\n\n";
-}
+echo json_encode($result, JSON_PRETTY_PRINT) . "\n";
 

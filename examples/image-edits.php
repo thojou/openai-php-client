@@ -7,8 +7,10 @@ $API_KEY = $argv[1];
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $openAi = new OpenAi($API_KEY);
-$result = $openAi->images()->generation([
-    'prompt' => 'An image of a real forest in the morning',
+$result = $openAi->images()->edit([
+    "image" => fopen(__DIR__ . '/assets/dog.png', 'rb'),
+    "mask" => fopen(__DIR__ . '/assets/dog_mask.png', 'rb'),
+    'prompt' => 'A dog inside a basket with a human family portrait in the background.',
     'size' => '256x256',
     'n' => 1
 ]);

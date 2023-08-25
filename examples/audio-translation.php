@@ -14,4 +14,4 @@ $result = $openAi->audio()->translation([
     'file' => $file
 ]);
 
-echo $result['text'] . "\n";
+echo json_encode($result, JSON_PRETTY_PRINT) . "\n";

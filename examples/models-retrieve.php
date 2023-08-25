@@ -7,10 +7,7 @@ $API_KEY = $argv[1];
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $openAi = new OpenAi($API_KEY);
-$result = $openAi->images()->generation([
-    'prompt' => 'An image of a real forest in the morning',
-    'size' => '256x256',
-    'n' => 1
-]);
+$result = $openAi->models()->retrieve('text-embedding-ada-002');
 
 echo json_encode($result, JSON_PRETTY_PRINT) . "\n";
+
