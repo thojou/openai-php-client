@@ -1,3 +1,4 @@
 /vendor/
 
+clover.xml
 .php-cs-fixer.cache

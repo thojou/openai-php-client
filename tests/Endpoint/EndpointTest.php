@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of OpenAi PHP Client.
+ *
+ * (c) Thomas Joußen <tjoussen91@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Thojou\OpenAi\Tests\Endpoint;
 
 use PHPUnit\Framework\TestCase;
@@ -96,13 +107,13 @@ class EndpointTest extends TestCase
         return [
             'files list' => [Files::class, 'list', 'files', 'GET'],
             'files delete' => [Files::class, 'delete', 'files', 'DELETE'],
-            'files retrieve' => [Files::class, 'retrieve', 'files/%s', 'GET', [1]],
-            'files content' => [Files::class, 'content', 'files/%s/content', 'GET', [1]],
-            'fine tuning retrieve' => [FineTuning::class, 'retrieve', 'fine_tuning/jobs/%s', 'GET', [1]],
-            'fine tuning events' => [FineTuning::class, 'events', 'fine_tuning/jobs/%s/events', 'GET', [1]],
-            'fine tuning cancel' => [FineTuning::class, 'cancel', 'fine_tuning/jobs/%s/cancel', 'POST', [1]],
+            'files retrieve' => [Files::class, 'retrieve', 'files/%s', 'GET', ["1"]],
+            'files content' => [Files::class, 'content', 'files/%s/content', 'GET', ["1"]],
+            'fine tuning retrieve' => [FineTuning::class, 'retrieve', 'fine_tuning/jobs/%s', 'GET', ["1"]],
+            'fine tuning events' => [FineTuning::class, 'events', 'fine_tuning/jobs/%s/events', 'GET', ["1"]],
+            'fine tuning cancel' => [FineTuning::class, 'cancel', 'fine_tuning/jobs/%s/cancel', 'POST', ["1"]],
             'model list' => [Models::class, 'list', 'models', 'GET'],
-            'model retrieve' => [Models::class, 'retrieve', 'models/%s', 'GET', [1]],
+            'model retrieve' => [Models::class, 'retrieve', 'models/%s', 'GET', ["1"]],
         ];
     }
 

@@ -28,5 +28,22 @@
         "psr-4": {
             "Thojou\\OpenAi\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "check": [
+            "@cs-fixer:check",
+            "@phpstan",
+            "@test:coverage"
+        ],
+        "dev": [
+            "@cs-fixer:fix",
+            "@phpstan",
+            "@test"
+        ],
+        "cs-fixer:check": "php-cs-fixer fix --dry-run --diff -v",
+        "cs-fixer:fix": "php-cs-fixer fix --diff -v",
+        "phpstan": "phpstan analyse --memory-limit=1G",
+        "test": "phpunit",
+        "test:coverage": "phpunit --coverage-text --coverage-clover=clover.xml"
     }
 }

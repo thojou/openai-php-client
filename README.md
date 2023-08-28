@@ -13,7 +13,7 @@ The **OpenAi PHP Client** is a user-friendly PHP library designed to facilitate 
 
 ## Installation
 
-You can effortlessly install the **OpenAi PHP Client** using the popular package manager [composer](https://getcomposer.org/) to install OpenAi PHP Client.
+You can effortlessly install the **OpenAi PHP Client** using the popular package manager [composer](https://getcomposer.org/).
 
 ```bash
 composer require thojou/openai-php-client

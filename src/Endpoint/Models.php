@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of OpenAi PHP Client.
+ *
+ * (c) Thomas Joußen <tjoussen91@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Thojou\OpenAi\Endpoint;
 
 use Thojou\OpenAi\Exception\OpenAiException;
@@ -13,7 +24,7 @@ use Thojou\OpenAi\Request;
  *
  * @internal This class is not meant to be used by library users.
  */
-final class Models extends Endpoint
+class Models extends Endpoint
 {
     /**
      * Lists the currently available models, and provides basic information about each one such as the owner and

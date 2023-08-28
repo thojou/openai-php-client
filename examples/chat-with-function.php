@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of OpenAi PHP Client.
+ *
+ * (c) Thomas Joußen <tjoussen91@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 use Thojou\OpenAi\OpenAi;
 
 $API_KEY = $argv[1];
@@ -8,7 +19,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 function hasEmployeeBirthday(string $employee): bool
 {
-    return in_array($employee, ["Alice", "Bob", "Marry"]);
+    return in_array($employee, ["Alice", "Bob", "Marry"], true);
 }
 
 // Describe available functions
